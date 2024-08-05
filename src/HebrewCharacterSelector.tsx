@@ -1,13 +1,5 @@
-import React, { useState } from 'react';
-import {
-  containerStyle,
-  headerStyle,
-  textStyle,
-  characterContainerStyle,
-  characterStyle,
-  selectedStyle,
-  selectedCharacterStyle
-} from './styles';
+import React from 'react';
+import { containerStyle, headerStyle, textStyle, characterContainerStyle, characterStyle, selectedStyle, selectedCharacterStyle } from './styles';
 
 const hebrewCharacters = [
   'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
@@ -16,22 +8,16 @@ const hebrewCharacters = [
 ];
 
 interface HebrewCharacterSelectorProps {
+  selectedCharacter: string;
   onCharacterSelect: (character: string) => void;
-  onOpenCamera: (open: boolean) => void;
+  onOpenCamera: () => void;
 }
 
-const HebrewCharacterSelector: React.FC<HebrewCharacterSelectorProps> = ({ onCharacterSelect, onOpenCamera }) => {
-  const [selectedCharacter, setSelectedCharacter] = useState<string | null>(null);
-
-  const handleCharacterClick = (character: string) => {
-    setSelectedCharacter(character);
-    onCharacterSelect(character);
-  };
-
-  const handleButtonClick = () => {
-    onOpenCamera(true);
-  };
-
+const HebrewCharacterSelector: React.FC<HebrewCharacterSelectorProps> = ({ 
+  selectedCharacter, 
+  onCharacterSelect, 
+  onOpenCamera 
+}) => {
   return (
     <div style={containerStyle}>
       <p style={headerStyle}>תבחר אות</p>
@@ -40,7 +26,7 @@ const HebrewCharacterSelector: React.FC<HebrewCharacterSelectorProps> = ({ onCha
           <span
             key={character}
             style={selectedCharacter === character ? selectedStyle : characterStyle}
-            onClick={() => handleCharacterClick(character)}
+            onClick={() => onCharacterSelect(character)}
           >
             {character}
           </span>
@@ -49,10 +35,10 @@ const HebrewCharacterSelector: React.FC<HebrewCharacterSelectorProps> = ({ onCha
       {selectedCharacter && (
         <div className="text-center">
           <p style={textStyle}>
-            האות שבחרת לבנות היא:  
-            <span style={selectedCharacterStyle}>{selectedCharacter}</span>
+            האות שבחרת לבנות היא:
+            <span style={selectedCharacterStyle}>{' ' + selectedCharacter}</span>
           </p>
-          <button className="btn btn-primary mx-auto d-block" onClick={handleButtonClick}>
+          <button className="btn btn-primary mx-auto d-block" onClick={onOpenCamera}>
             תפתח מצלמה
           </button>
         </div>
