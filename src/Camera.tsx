@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import Webcam from "react-webcam";
 
@@ -9,15 +9,18 @@ const videoConstraints: MediaStreamConstraints["video"] = {
 };
 
 interface CameraProps {
-  OnImageCapture: (imageSrc: string) => void;
+  onImageCapture: (imageSrc: string) => void;
 }
 
-const Camera: React.FC<CameraProps> = ({OnImageCapture}) => {
+const Camera: React.FC<CameraProps> = ({ onImageCapture }) => {
   const webCamRef = useRef<Webcam>(null);
+
   const capture = useCallback(() => {
     const imageSrc = webCamRef.current?.getScreenshot();
-    OnImageCapture(imageSrc ?? "");
-  }, [webCamRef, OnImageCapture]);
+    if (imageSrc) {
+      onImageCapture(imageSrc);
+    }
+  }, [webCamRef, onImageCapture]);
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center vh-100 bg-dark">
