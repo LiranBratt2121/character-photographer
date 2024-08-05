@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Camera from "./Camera";
+import HebrewCharacterSelector from "./HebrewCharacterSelector";
+import ResultScreen from "./ResultScreen";
 
-function App() {
+const App: React.FC = () => {
+  const [selectedCharacter, setSelectedCharacter] = useState<string>("");
+  const [isCameraOpen, setIsCameraOpen] = useState<boolean>(false);
+  const [img, setImg] = useState<string>("");
+
+  const handleCharacterSelect = (character: string) => {
+    setSelectedCharacter(character);
+  };
+
+  const handleCameraOpen = (open: boolean) => {
+    setIsCameraOpen(open);
+  };
+
+  const handleOnImageCapture = (imageString: string) => {
+    setImg(imageString);
+    setIsCameraOpen(false);
+  };
+
+  const handleBackToSelector = () => {
+    setImg("");
+    setSelectedCharacter("");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {img && selectedCharacter ? (
+        <ResultScreen 
+          image={img} 
+          character={selectedCharacter} 
+          onBack={handleBackToSelector} 
+        />
+      ) : isCameraOpen ? (
+        <Camera OnImageCapture={handleOnImageCapture} />
+      ) : (
+        <HebrewCharacterSelector 
+          onCharacterSelect={handleCharacterSelect} 
+          onOpenCamera={handleCameraOpen} 
+        />
+      )}
     </div>
   );
-}
+};
 
 export default App;
