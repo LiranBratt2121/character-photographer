@@ -1,11 +1,18 @@
+import io
 from rembg import remove
 from PIL import Image
 
 class ImageProcessor:
     def __remove_background(self, image_path: str) -> Image.Image:
-        input_image = Image.open(image_path)
-        output_image = remove(input_image)
-        return output_image.convert("RGBA")
+        with Image.open(image_path) as input_image:
+            if input_image.format != 'PNG':
+                with io.BytesIO() as temp_stream:
+                    input_image.save(temp_stream, format='PNG')
+                    temp_stream.seek(0)
+                    input_image = Image.open(temp_stream)
+            
+            output_image = remove(input_image)
+            return output_image.convert("RGBA")
 
     def __manipulate_image(self, image: Image.Image) -> Image.Image:
         data = image.getdata()
