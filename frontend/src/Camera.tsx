@@ -14,11 +14,11 @@ interface CameraProps {
 
 const Camera: React.FC<CameraProps> = ({ onImageCapture }) => {
   const webCamRef = useRef<Webcam>(null);
-
   const capture = useCallback(() => {
     const imageSrc = webCamRef.current?.getScreenshot();
     if (imageSrc) {
-      onImageCapture(imageSrc);
+      const base64Data = imageSrc.replace(/^data:image\/png;base64,/, '');
+      onImageCapture(base64Data);
     }
   }, [webCamRef, onImageCapture]);
 
@@ -30,6 +30,7 @@ const Camera: React.FC<CameraProps> = ({ onImageCapture }) => {
         screenshotFormat="image/png"
         videoConstraints={videoConstraints}
         ref={webCamRef}
+        screenshotQuality={0.3}
       />
       <button className="btn btn-primary" onClick={capture}>
         צלם תמונה
