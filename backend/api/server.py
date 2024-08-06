@@ -4,12 +4,14 @@ from PIL import Image, UnidentifiedImageError
 from io import BytesIO
 from datetime import datetime
 from time import time
+from random import random
 import base64
 import os
 
 from core.image_processor import ImageProcessor
 from core.yolo_model import YoloModel
 from firebase.utils import save_to_firebase
+from api.server_utils import english2hebrew
 
 class Server:
     def __init__(self) -> None:
@@ -39,9 +41,9 @@ class Server:
 
             try:
                 os.makedirs('images', exist_ok=True)
-                image_path = f'images/uploaded_image_{time()}.png'  # Save uploaded image temporarily
+                image_path = f'images/uploaded_image_{time() + random()}.png'  # Save uploaded image temporarily
                 image.save(image_path)
-                output_path = f'images/output_{time()}.png'
+                output_path = f'images/output_{time() + random()}.png'
                 self.image_processor.process_image(image_path, save=True, output_path=output_path)
                 detected_character = self.yolo_model.predict_class(output_path)
                 processed_image = Image.open(output_path)
@@ -54,7 +56,7 @@ class Server:
                 return jsonify({'error': 'An error occurred during image processing'}), 500
 
             data = {
-                'detected_character': detected_character,
+                'detected_character': english2hebrew.get(detected_character, detected_character),
                 'true_character': request.form['true_character'],
                 'og_image': image_64string,
                 'processed_image': processed_image_64string,
