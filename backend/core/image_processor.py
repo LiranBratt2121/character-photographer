@@ -21,7 +21,7 @@ class ImageProcessor:
     def __save_image(self, image: Image.Image, output_path: str) -> None:
         image.save(output_path)
 
-    def process_image(self, input_path: str, save=False, output_path='output.png') -> Image.Image:
+    def process_image(self, input_path: str, save=False, output_path='images/output.png') -> Image.Image:
         image = self.__remove_background(input_path)
         image = self.__manipulate_image(image)
         image = self.__add_white_background(image)
