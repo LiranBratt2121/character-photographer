@@ -2,7 +2,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-cred = credentials.Certificate('backend/firebase/tap2tell-dfb1a-firebase-adminsdk-xdiv6-d4067d9089.json')
+cred = credentials.Certificate('firebase/secret.json')
 """
 For users that are not me lol.
 Generate a new private key and save the JSON file. Then use the file to initialize the SDK
