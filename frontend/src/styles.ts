@@ -56,3 +56,23 @@ export const selectedCharacterStyle: CSSProperties = {
   fontWeight: 'bold',
   fontSize: '1.15rem',
 };
+
+export const buttonStyle: CSSProperties = {
+  marginTop: '1rem',
+  padding: '0.5rem 1rem',
+  backgroundColor: '#007bff',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '0.375rem',
+  cursor: 'pointer',
+  textAlign: 'center',
+  fontSize: '1rem'
+};
+
+export const imageStyle: CSSProperties = {
+  maxWidth: '100%',
+  maxHeight: '300px',
+  margin: '1rem 0',
+  borderRadius: '0.375rem',
+  boxShadow: '0 0 0.5rem rgba(0, 0, 0, 0.3)'
+};
