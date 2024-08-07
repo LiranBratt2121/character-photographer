@@ -6,11 +6,13 @@ class ImageProcessor:
     def __remove_background(self, image_path: str) -> Image.Image:
         with Image.open(image_path) as input_image:
             if input_image.format != 'PNG':
+                print("Converting image to PNG format...")
                 with io.BytesIO() as temp_stream:
                     input_image.save(temp_stream, format='PNG')
                     temp_stream.seek(0)
-                    input_image = Image.open(temp_stream)
-            
+                    input_image = Image.open(temp_stream).copy()
+                    print("Image converted to PNG format.")
+                    
             output_image = remove(input_image)
             return output_image.convert("RGBA")
 
@@ -18,11 +20,11 @@ class ImageProcessor:
         data = image.getdata()
         updated_image_data = [(0, 0, 0, 255) if item[3] > 0 else item for item in data]
         image.putdata(updated_image_data)
-        return image.resize((640, 480))
+        return image
 
     def __add_white_background(self, image: Image.Image) -> Image.Image:
-        white_background = Image.new("RGBA", list(map(lambda s: s * 5, image.size)), (255, 255, 255, 255))
-        white_background.paste(image, list(map(lambda s: s // 5, image.size)), image)
+        white_background = Image.new("RGBA", image.size, (255, 255, 255, 255))
+        white_background.paste(image, (0, 0), image)
         return white_background
 
     def __save_image(self, image: Image.Image, output_path: str) -> None:
