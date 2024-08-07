@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router} from 'react-router-dom';
-import AppContent from './hooks/AppContent';
+import AppContent from './components/AppContent';
 
 
 const App: React.FC = () => {
