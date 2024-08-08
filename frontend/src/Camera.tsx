@@ -12,9 +12,15 @@ interface CameraProps {
   onImageCapture: (imageSrc: string) => void;
 }
 
-const Camera: React.FC<CameraProps> = ({ onImageCapture }) => {
+  const [isCameraReady, setCameraReady] = useState(false);
+
   const webCamRef = useRef<Webcam>(null);
   const capture = useCallback(() => {
+    if (!isCameraReady) {
+      alert('המצלמה עדיין לא מוכנה');
+      return;
+    }
+
     const imageSrc = webCamRef.current?.getScreenshot();
     if (imageSrc) {
       const base64Data = imageSrc.replace(/^data:image\/png;base64,/, '');
@@ -31,10 +37,13 @@ const Camera: React.FC<CameraProps> = ({ onImageCapture }) => {
         videoConstraints={videoConstraints}
         ref={webCamRef}
         screenshotQuality={0.3}
+        onUserMedia={() => setCameraReady(true)}
+        onUserMediaError={() => setCameraReady(false)}
       />
       <button className="btn btn-primary" onClick={capture}>
         צלם תמונה
       </button>
+      {!isCameraReady && <p className="text-light">המצלמה עדיין לא מוכנה...</p>}
     </div>
   );
 }
