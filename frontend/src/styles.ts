@@ -13,7 +13,7 @@ export const containerStyle: CSSProperties = {
 };
 
 export const headerStyle: CSSProperties = {
-  fontSize: isMobile ? '1.5rem' : '2rem',
+  fontSize: isMobile ? '1.5rem' : '3.5rem',
   color: '#fff',
   marginBottom: '1rem',
   textAlign: 'center'
