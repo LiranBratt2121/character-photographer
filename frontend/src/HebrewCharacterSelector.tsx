@@ -10,13 +10,11 @@ const hebrewCharacters = [
 interface HebrewCharacterSelectorProps {
   selectedCharacter: string;
   onCharacterSelect: (character: string) => void;
-  onOpenCamera: () => void;
 }
 
 const HebrewCharacterSelector: React.FC<HebrewCharacterSelectorProps> = ({ 
   selectedCharacter, 
   onCharacterSelect, 
-  onOpenCamera 
 }) => {
   return (
     <div style={containerStyle}>
@@ -32,17 +30,6 @@ const HebrewCharacterSelector: React.FC<HebrewCharacterSelectorProps> = ({
           </span>
         ))}
       </div>
-      {selectedCharacter && (
-        <div className="text-center">
-          <p style={textStyle}>
-            האות שבחרת לבנות היא:
-            <span style={selectedCharacterStyle}>{' ' + selectedCharacter}</span>
-          </p>
-          <button className="btn btn-primary mx-auto d-block" onClick={onOpenCamera}>
-            תפתח מצלמה
-          </button>
-        </div>
-      )}
     </div>
   );
 };
