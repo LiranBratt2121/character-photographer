@@ -13,6 +13,7 @@ const AppContent: React.FC = () => {
 
   const handleCharacterSelect = (character: string) => {
     setSelectedCharacter(character);
+    setTimeout(handleOpenCamera, 1200)
   };
 
   const handleOpenCamera = () => {
@@ -38,13 +39,12 @@ const AppContent: React.FC = () => {
           <HebrewCharacterSelector
             selectedCharacter={selectedCharacter}
             onCharacterSelect={handleCharacterSelect}
-            onOpenCamera={handleOpenCamera}
           />
         }
       />
       <Route
         path="/camera"
-        element={<Camera onImageCapture={handleImageCapture} />}
+        element={<Camera onImageCapture={handleImageCapture} hebrewCharacter={selectedCharacter}/>}
       />
       <Route
         path="/result"
