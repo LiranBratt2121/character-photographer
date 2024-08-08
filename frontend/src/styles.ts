@@ -29,7 +29,8 @@ export const characterContainerStyle: CSSProperties = {
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'center',
-  gap: '0.5rem'
+  gap: '0.5rem',
+  direction: 'rtl'
 };
 
 export const characterStyle: CSSProperties = {
