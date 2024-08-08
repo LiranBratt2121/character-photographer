@@ -21,6 +21,8 @@ import ReshAudio from '../assets/audio/Resh.mp3';
 import ShinAudio from '../assets/audio/Shin.mp3';
 import TavAudio from '../assets/audio/Tav.mp3';
 
+import Success from '../assets/audio/Success.mp3';
+
 import AlefPhoto from '../assets/media/Alef.png';
 import BetPhoto from '../assets/media/Bet.png';
 import GimelPhoto from '../assets/media/Gimel.png';
