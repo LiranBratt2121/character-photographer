@@ -22,6 +22,7 @@ import ShinAudio from '../assets/audio/Shin.mp3';
 import TavAudio from '../assets/audio/Tav.mp3';
 
 import Success from '../assets/audio/Success.mp3';
+import Failure from '../assets/audio/faliure.mp3'
 
 import AlefPhoto from '../assets/media/Alef.png';
 import BetPhoto from '../assets/media/Bet.png';
