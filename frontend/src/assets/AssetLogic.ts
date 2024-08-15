@@ -47,7 +47,13 @@ import ReshPhoto from '../assets/media/Resh.png';
 import ShinPhoto from '../assets/media/Shin.png';
 import TavPhoto from '../assets/media/Tav.png';
 
-export const hebrewAudioContainer: {[key: string]: string} = {
+export const hebrewCharacters = [
+    'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
+    'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ', 'ק', 'ר',
+    'ש', 'ת'
+];
+
+export const hebrewAudioContainer: { [key: string]: string } = {
     'Alef': AlefAudio,
     'Bet': BetAudio,
     'Gimel': GimelAudio,
@@ -72,7 +78,7 @@ export const hebrewAudioContainer: {[key: string]: string} = {
     'Tav': TavAudio,
 }
 
-export const hebrewPhotoContainer: {[key: string]: string} = {
+export const hebrewPhotoContainer: { [key: string]: string } = {
     'Alef': AlefPhoto,
     'Bet': BetPhoto,
     'Gimel': GimelPhoto,
