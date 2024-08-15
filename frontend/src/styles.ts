@@ -58,6 +58,12 @@ export const selectedCharacterStyle: CSSProperties = {
   fontSize: '1.15rem',
 };
 
+export const photoCharacter: CSSProperties = {
+  width: isMobile ? '3rem' : '6.5rem',
+  height: isMobile ? '3rem' : '6.5rem',
+  marginLeft: "0.2rem"
+}
+
 export const buttonStyle: CSSProperties = {
   marginTop: '1rem',
   padding: '0.5rem 1rem',
