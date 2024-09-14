@@ -5,6 +5,7 @@ from io import BytesIO
 from datetime import datetime
 from time import time
 from random import random
+from dotenv import  load_dotenv
 import base64
 import os
 
@@ -15,17 +16,23 @@ from api.server_utils import english2hebrew
 
 class Server:
     def __init__(self) -> None:
+        load_dotenv()
+        
         self.app = Flask(__name__)
         self.CORS = CORS(self.app)
         self.image_processor = ImageProcessor()
         self.yolo_model = YoloModel()
-
         self.__register_routes()
+        print(os.environ.get('DEBUG'))
         print('Server initialized...')
 
     def __register_routes(self) -> None:
         self.app.add_url_rule('/process_image', 'process_image', self.process_image, methods=['POST'])
+        self.app.add_url_rule('/test', 'test', self.test, methods=['GET'])
 
+    def test(self) -> Response:
+        return "hello world"
+    
     def process_image(self) -> Response:
         try:
             if 'image_string' not in request.form:
@@ -77,4 +84,4 @@ class Server:
             return jsonify({'error': 'An unexpected error occurred'}), 500
 
     def run(self):
-        self.app.run(debug=True, host='0.0.0.0', port=5000)
+        self.app.run(debug=int(os.environ.get('DEBUG')) == 1, port=int(os.environ.get('PORT', 8080)))
