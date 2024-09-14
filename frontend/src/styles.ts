@@ -55,7 +55,8 @@ export const selectedStyle: CSSProperties = {
 
 export const selectedCharacterStyle: CSSProperties = {
   fontWeight: 'bold',
-  fontSize: '1.15rem',
+  fontSize: '5rem',
+  color: 'orange'
 };
 
 export const photoCharacter: CSSProperties = {
