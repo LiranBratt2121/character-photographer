@@ -132,3 +132,7 @@ export const english2Hebrew: { [key: string]: string } = Object.fromEntries(
     Object.entries(hebrew2english)
         .map(([hebrew, english]) => [english, hebrew]))
 
+export const feedbackAudio = {
+    success: Success,
+    failure: Failure
+}
