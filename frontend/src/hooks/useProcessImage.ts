@@ -33,7 +33,7 @@ const useProcessImage = ({imageString64, true_character, host, port, endPoint, a
     formData.append('image_string', imageString64);
     formData.append('true_character', true_character);
 
-    const path = `http://${host}:${port}/${endPoint}`
+    const path = !args ? `http://${host}:${port}/${endPoint}` : `https://${args}/${endPoint}`
     console.log(path)
     try {
         const response = await axios.post(
