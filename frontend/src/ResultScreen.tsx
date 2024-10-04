@@ -23,7 +23,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ image, character, onBack })
   const { data, loading, error, processImage } = useProcessImage(props);
 
   const [playSuccess] = useSound(feedbackAudio.success);
-  const [playFailure] = useSound(feedbackAudio.failure);
+  // const [playFailure] = useSound(feedbackAudio.failure);
+  const [playFailure] = useSound(feedbackAudio.success);
 
   const isRight = () => {
       if (data && data.result) {
